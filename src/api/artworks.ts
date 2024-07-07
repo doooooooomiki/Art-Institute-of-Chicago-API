@@ -5,12 +5,13 @@ export async function getArtworks() {
 
   const match = await cache.match(url)
 
-  if (match) {
-    return match.json()
-  } else {
-    await cache.add(url)
-    return (await cache.match(url))?.json()
-  }
+  if (match) return match.json()
+
+  const response = await fetch(url)
+
+  cache.put(url, response.clone())
+
+  return await response.json()
 }
 
 export async function getArtworkById(id: string) {
@@ -20,10 +21,11 @@ export async function getArtworkById(id: string) {
 
   const match = await cache.match(url)
 
-  if (match) {
-    return match.json()
-  } else {
-    await cache.add(url)
-    return (await cache.match(url))?.json()
-  }
+  if (match) return match.json()
+
+  const response = await fetch(url)
+
+  cache.put(url, response.clone())
+
+  return await response.json()
 }
