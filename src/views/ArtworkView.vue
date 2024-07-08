@@ -20,7 +20,7 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 
 const loading = ref(false)
-const artwork = ref(null)
+const artwork = ref<{ title: string; main_reference_number: string } | null>(null)
 const error = ref(null)
 
 watch(
